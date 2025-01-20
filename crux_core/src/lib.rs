@@ -158,7 +158,7 @@ pub mod testing;
 pub mod typegen;
 
 mod capabilities;
-mod command;
+pub mod command;
 mod core;
 
 use serde::Serialize;
