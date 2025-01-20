@@ -34,7 +34,7 @@
 //!
 //! TODO: composition example
 
-mod builder;
+pub mod builder;
 mod context;
 mod executor;
 mod stream;
