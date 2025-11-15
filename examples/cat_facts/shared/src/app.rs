@@ -200,6 +200,19 @@ impl App for CatFacts {
                 Command::done()
             }
             Event::None => Command::done(),
+            Event::New => {
+                let Some(_fact) = &model.cat_fact else {
+                    Command::event(Event::Get)
+                        // I can assume by the end of the "Get flow" &model.cat_fact will be set e.g.
+                        // .afterFlow(Command::event(Event::new))
+                        // but I cant assume by the end of the "Get event" I will have &model.cat_fact
+                        // because if it doesn't exist get will start Event:Fetch
+                        .then(Command::event(Event::new)) // so this will cause unnecessary retriggers of get while the fetch is happening
+                };
+                // some code that assumes &model.cat_fact is set,
+                // this is a bit contrived in my code base im not calling back on myself im calling another event that needs the data `&model.cat_fact` to exits
+            }
+
         }
     }
 
